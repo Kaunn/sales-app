@@ -14,11 +14,14 @@
         <title>Clientes</title>
     </head>
     <body>
-        <h1>Clientes cadastrados</h1>
+        <div>
+            <h1>Clientes cadastrados</h1>
+            <a href="novo-cliente.jsp">Inserir um novo cliente</a>
+        </div>
         <% List<Customer> customersList = (List) application.getAttribute("customersList"); %>
-        
+
         <% for (Customer customer : customersList) { %>
-                <p><%=customer.getName()%></p>
+            <p><%=customer.getName()%></p>
         <% } %>
 
     </body>

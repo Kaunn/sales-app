@@ -14,12 +14,21 @@
     </head>
     <body>
         <% 
-           User user = (User) application.getAttribute("user");
+           User user = (User) session.getAttribute("userLogged");
+           if (user == null){
         %>
-        <h3>Usuário logado: <%=user.getUsername() %></h3>
-        <h1>Sales App</h1>
-        <nav>
-            <a href="novo-cliente.jsp">Novo cliente</a>
-        </nav>
+            <p style="text-align: center">É preciso fazer login para ter acesso</p>
+            <p style="text-align: center">
+                Clique <a href="login.jsp">aqui</a> para fazer login
+            </p>
+        
+        <% } else { %>
+        
+            <h3>Usuário logado: <%=user.getUsername() %></h3>
+            <h1>Sales App</h1>
+            <nav>
+                <a href="novo-cliente.jsp">Novo cliente</a>
+            </nav>
+        <% } %>
     </body>
 </html>
