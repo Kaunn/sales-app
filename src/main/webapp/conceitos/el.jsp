@@ -14,9 +14,7 @@
     <body>
         <h1>Forma Antiga</h1>
         <h1>Forma Nova</h1>
-        
-          
-        <%--User user = (User) session.getAttribute("userLogged")--%>;
+       
         <p>Usuário: ${userLogged.getUsername()}</p>
         <p>Usuário: ${userLogged.username}</p>
         <p>3 > 4 = ${3>4}</p>

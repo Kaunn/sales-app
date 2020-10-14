@@ -4,8 +4,7 @@
     Author     : leonardo
 --%>
 
-<%@page import="br.edu.unijuazeiro.progiii.sales.models.Customer"%>
-<%@page import="java.util.List"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -18,11 +17,29 @@
             <h1>Clientes cadastrados</h1>
             <a href="novo-cliente.jsp">Inserir um novo cliente</a>
         </div>
-        <% List<Customer> customersList = (List) application.getAttribute("customersList"); %>
 
-        <% for (Customer customer : customersList) { %>
-            <p><%=customer.getName()%></p>
-        <% } %>
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>CPF</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach var="customer" items="${customersList}">
+                        <tr>
+                            <td>${customer.name}</td>
+                            <td>${customer.cpf}</td>
+                            <td>Editar Remover</td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </div>
+
+
 
     </body>
 </html>
