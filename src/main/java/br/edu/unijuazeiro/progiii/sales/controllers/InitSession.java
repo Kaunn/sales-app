@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.edu.unijuazeiro.progiii.sales.servlets;
+package br.edu.unijuazeiro.progiii.sales.controllers;
 
 import java.io.IOException;
 import javax.servlet.ServletContext;

@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.edu.unijuazeiro.progiii.sales.servlets;
+package br.edu.unijuazeiro.progiii.sales.controllers;
 
-import br.edu.unijuazeiro.progiii.sales.models.User;
+import br.edu.unijuazeiro.progiii.sales.domain.user.User;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
  * @author leonardo
  */
 @WebServlet("/auth")
-public class AuthServlet extends HttpServlet {
+public class AuthController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)

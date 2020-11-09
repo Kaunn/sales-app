@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.edu.unijuazeiro.progiii.sales.db;
+package br.edu.unijuazeiro.progiii.sales.infrastructure;
 
-import br.edu.unijuazeiro.progiii.sales.models.Customer;
+import br.edu.unijuazeiro.progiii.sales.domain.customer.Customer;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletContext;

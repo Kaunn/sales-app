@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.edu.unijuazeiro.progiii.sales.servlets;
+package br.edu.unijuazeiro.progiii.sales.controllers;
 
-import br.edu.unijuazeiro.progiii.sales.db.CustomersDB;
-import br.edu.unijuazeiro.progiii.sales.models.Customer;
+import br.edu.unijuazeiro.progiii.sales.application.CustomerApplication;
+import br.edu.unijuazeiro.progiii.sales.infrastructure.CustomersDB;
+import br.edu.unijuazeiro.progiii.sales.domain.customer.Customer;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,9 +33,13 @@ public class CustomersServlet extends HttpServlet {
         customer.setCpf(cpf);
         customer.setName(name);
         
-        CustomersDB customersDB = new CustomersDB(getServletContext());
-        customersDB.save(customer);
-        resp.sendRedirect("customers.jsp");
+        CustomerApplication customerApplication = new CustomerApplication();
+        customerApplication.save(customer);
+       
+//       
+//        CustomersDB customersDB = new CustomersDB(getServletContext());
+//        customersDB.save(customer);
+//        resp.sendRedirect("customers.jsp");
        
     }
 
