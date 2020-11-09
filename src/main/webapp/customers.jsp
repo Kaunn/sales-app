@@ -32,7 +32,9 @@
                         <tr>
                             <td>${customer.name}</td>
                             <td>${customer.cpf}</td>
-                            <td>Editar Remover</td>
+                            <td>
+                                <a href="customers?id=${customer.id}">Editar</a>
+                            </td>
                         </tr>
                     </c:forEach>
                 </tbody>

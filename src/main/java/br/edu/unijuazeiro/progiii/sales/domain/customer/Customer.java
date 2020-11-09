@@ -5,15 +5,22 @@
  */
 package br.edu.unijuazeiro.progiii.sales.domain.customer;
 
+import java.util.UUID;
+
 /**
  *
  * @author leonardo
  */
 public class Customer {
 
+    private String id;
     private String name;
     private String cpf;
-
+    
+    public Customer(){
+        this.id = UUID.randomUUID().toString();
+    }
+    
     public String getName() {
         return name;
     }
@@ -29,5 +36,10 @@ public class Customer {
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
+
+    public String getId() {
+        return id;
+    }
+    
 
 }

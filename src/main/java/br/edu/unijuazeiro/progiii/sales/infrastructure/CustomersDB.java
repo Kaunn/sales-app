@@ -14,25 +14,43 @@ import javax.servlet.ServletContext;
  *
  * @author leonardo
  */
-public class CustomersDB  {
-    
-    private List<Customer> customersList;
-    
+public class CustomersDB {
 
-    public CustomersDB(ServletContext context){
-        if (context.getAttribute("customersList") != null){
-           this.customersList = (List) context.getAttribute("customersList");
-        }else{
-           this.customersList = new ArrayList<>();
-           context.setAttribute("customersList", this.customersList);
+    private List<Customer> customersList;
+
+    public CustomersDB(ServletContext context) {
+        if (context.getAttribute("customersList") != null) {
+            this.customersList = (List) context.getAttribute("customersList");
+        } else {
+            this.customersList = new ArrayList<>();
+            context.setAttribute("customersList", this.customersList);
         }
     }
-    
-    public void save(Customer customer){
+
+    public void save(Customer customer) {
         this.customersList.add(customer);
         System.out.println("Log --- " + customersList);
     }
-    
-    public void listAll(){
+
+    public void listAll() {
     }
+
+    public Customer findById(String id) {
+        Customer found = null;
+        for (Customer customer : customersList) {
+            if (customer.getId().equals(id)) {
+                found = customer;
+                break;
+            }
+        }
+        return found;
+    }
+    
+    //Implementação "mais" funcional. Java 8 acima
+//    public Customer findById(String id) {
+//        return customersList.stream()
+//                .filter(customer -> customer.getId().equals(id))
+//                .findFirst()
+//                .orElse(null); 
+//    }
 }
