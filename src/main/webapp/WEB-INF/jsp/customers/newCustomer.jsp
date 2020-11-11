@@ -13,9 +13,9 @@
     </head>
     <body>
         <h1>Novo cliente</h1>
-        <form action="customers" method="post">
-            <input type="text" name="name" placeholder="Nome"/>
-            <input type="text" name="cpf" placeholder="CPF"/>
+        <form action="/sales-app/customers/save" method="post">
+            <input type="text" name="customer.name" placeholder="Nome"/>
+            <input type="text" name="customer.cpf" placeholder="CPF"/>
             <button type="submit">Cadastrar</button>
         </form>
     </body>

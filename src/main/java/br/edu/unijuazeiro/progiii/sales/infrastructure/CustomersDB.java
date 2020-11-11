@@ -8,31 +8,23 @@ package br.edu.unijuazeiro.progiii.sales.infrastructure;
 import br.edu.unijuazeiro.progiii.sales.domain.customer.Customer;
 import java.util.ArrayList;
 import java.util.List;
-import javax.servlet.ServletContext;
+import javax.enterprise.context.ApplicationScoped;
 
 /**
  *
  * @author leonardo
  */
+@ApplicationScoped
 public class CustomersDB {
 
-    private List<Customer> customersList;
+    private List<Customer> customersList = new ArrayList<>();
 
-    public CustomersDB(ServletContext context) {
-        if (context.getAttribute("customersList") != null) {
-            this.customersList = (List) context.getAttribute("customersList");
-        } else {
-            this.customersList = new ArrayList<>();
-            context.setAttribute("customersList", this.customersList);
-        }
+    public CustomersDB() {
+       
     }
 
     public void save(Customer customer) {
         this.customersList.add(customer);
-        System.out.println("Log --- " + customersList);
-    }
-
-    public void listAll() {
     }
 
     public Customer findById(String id) {
@@ -45,7 +37,11 @@ public class CustomersDB {
         }
         return found;
     }
-    
+
+    public List<Customer> listAll() {
+        return customersList;
+    }
+
     //Implementação "mais" funcional. Java 8 acima
 //    public Customer findById(String id) {
 //        return customersList.stream()

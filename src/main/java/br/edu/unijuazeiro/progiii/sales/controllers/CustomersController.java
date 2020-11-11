@@ -5,51 +5,53 @@
  */
 package br.edu.unijuazeiro.progiii.sales.controllers;
 
-import br.edu.unijuazeiro.progiii.sales.infrastructure.CustomersDB;
+import br.com.caelum.vraptor.Controller;
+import br.com.caelum.vraptor.Get;
+import br.com.caelum.vraptor.Path;
+import br.com.caelum.vraptor.Post;
+import br.com.caelum.vraptor.Result;
 import br.edu.unijuazeiro.progiii.sales.domain.customer.Customer;
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import br.edu.unijuazeiro.progiii.sales.infrastructure.CustomersDB;
+import javax.inject.Inject;
+
 
 /**
  *
  * @author leonardo
- *
  */
-@WebServlet("/customers")
-public class CustomersController extends HttpServlet {
+@Controller
+@Path("customers")
+public class CustomersController {
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
+    @Inject
+    private CustomersDB customerDB;
+    @Inject
+    private Result result;
+    
+    @Get("new")
+    public void newCustomer(){
 
-        String name = req.getParameter("name");
-        String cpf = req.getParameter("cpf");
-
-        Customer customer = new Customer();
-        customer.setCpf(cpf);
-        customer.setName(name);
-        System.out.println(customer.getId());
-//        CustomerApplication customerApplication = new CustomerApplication();
-//        customerApplication.save(customer);
-        CustomersDB customersDB = new CustomersDB(getServletContext());
-        customersDB.save(customer);
-        resp.sendRedirect("customers.jsp");   
-    }
-
-    // GET /customers?id=34234234
-    //
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
-            throws ServletException, IOException {
-        String id = req.getParameter("id");
-        CustomersDB customersDB = new CustomersDB(getServletContext());
-        System.out.println(customersDB.findById(id).getName()); 
     }
     
-    
+    @Get("")
+    public void getCustomers(){
+       result.include("customersList", this.customerDB.listAll());
+    }
 
+    @Post("save")     
+    public void save(Customer customer){
+        this.customerDB.save(customer);
+        result.redirectTo(this).getCustomers();
+    }
+    
+    @Post("update")
+    public void update(){
+        
+    }
+    
+    @Post("delete")
+    public void delete(){
+        
+    }
+    
 }
