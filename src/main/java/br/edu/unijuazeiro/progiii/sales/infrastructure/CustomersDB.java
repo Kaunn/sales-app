@@ -20,7 +20,7 @@ public class CustomersDB {
     private List<Customer> customersList = new ArrayList<>();
 
     public CustomersDB() {
-       
+
     }
 
     public void save(Customer customer) {
@@ -38,8 +38,23 @@ public class CustomersDB {
         return found;
     }
 
+    public void update(Customer customer) {
+        for (int i = 0; i < customersList.size(); i++) {
+            if (customersList.get(i).getId().equals(customer.getId())) {
+                System.out.println("Aqui " + customer.getName());
+                customersList.set(i, customer);
+                break;
+            }
+        }
+
+    }
+
     public List<Customer> listAll() {
         return customersList;
+    }
+
+    public void delete(String id) {
+        customersList.removeIf(customer -> customer.getId().equals(id));
     }
 
     //Implementação "mais" funcional. Java 8 acima

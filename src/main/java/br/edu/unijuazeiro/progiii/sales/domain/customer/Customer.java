@@ -20,7 +20,11 @@ public class Customer {
     public Customer(){
         this.id = UUID.randomUUID().toString();
     }
-    
+
+    public void setId(String id) {
+        this.id = id;
+    }
+   
     public String getName() {
         return name;
     }
@@ -40,6 +44,13 @@ public class Customer {
     public String getId() {
         return id;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        return ((Customer)o).getId().equals(this.id);
+    }
+    
+    
     
 
 }

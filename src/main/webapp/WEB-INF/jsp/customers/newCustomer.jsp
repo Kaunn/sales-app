@@ -14,6 +14,7 @@
     <body>
         <h1>Novo cliente</h1>
         <form action="/sales-app/customers/save" method="post">
+            <!-- customer.name = asav -->
             <input type="text" name="customer.name" placeholder="Nome"/>
             <input type="text" name="customer.cpf" placeholder="CPF"/>
             <button type="submit">Cadastrar</button>

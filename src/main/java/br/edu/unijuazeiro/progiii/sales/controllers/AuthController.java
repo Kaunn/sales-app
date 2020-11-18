@@ -5,46 +5,53 @@
  */
 package br.edu.unijuazeiro.progiii.sales.controllers;
 
+import br.com.caelum.vraptor.Controller;
+import br.com.caelum.vraptor.Get;
+import br.com.caelum.vraptor.Post;
+import br.com.caelum.vraptor.Result;
 import br.edu.unijuazeiro.progiii.sales.domain.user.User;
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import br.edu.unijuazeiro.progiii.sales.infrastructure.UsersDB;
+import br.edu.unijuazeiro.progiii.sales.web.components.AuthSession;
+import javax.inject.Inject;
 
 /**
  *
  * @author leonardo
  */
-@WebServlet("/auth")
-public class AuthController extends HttpServlet {
+@Controller
+public class AuthController {
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-
-        String username = req.getParameter("username");
-        String password = req.getParameter("password");
-     
-        if (username.equalsIgnoreCase("joao") && password.equals(
-                "123123")) {
-            User user = new User(username, password);
-            HttpSession session = req.getSession();
-            session.setAttribute("userLogged", user);
-            resp.sendRedirect("home.jsp");
-        }else{
-            
-            
-        }
-
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
+   @Inject
+   private UsersDB usersDB;
+   
+   @Inject
+   private Result result;
+   
+   @Inject
+   private AuthSession session;
+    
+   @Get("login")
+   public void login(){
        
-    }
-
+   }
+   
+   @Post("auth")
+   public void authenticate(User user){
+      User fromDB = this.usersDB.findByUsername(user.getUsername());
+      if (fromDB != null){
+          if (fromDB.getPassword().equals(user.getPassword())){
+              this.session.setUsername(fromDB.getUsername());
+              this.result.redirectTo(CustomersController.class).getCustomers();
+          }
+      }else{
+         result.include("msgLoginError", "Usuário/senha inválidos");
+         result.redirectTo(this).login();
+      }
+   } 
+   
+   @Get("logout")
+   public void logout(){
+       this.session.logout();
+       result.redirectTo(this).login();
+   }
 }

@@ -33,7 +33,11 @@
                             <td>${customer.name}</td>
                             <td>${customer.cpf}</td>
                             <td>
-                                <a href="customers?id=${customer.id}">Editar</a>
+                                <a href="customers/id/${customer.id}">Editar</a>
+                                <form action="customers/delete" method="post">
+                                    <input type="hidden" name="customer.id" value="${customer.id}"/>
+                                    <button>Excluir</button>
+                                </form>
                             </td>
                         </tr>
                     </c:forEach>
