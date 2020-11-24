@@ -37,6 +37,12 @@ public class CustomersDB {
         }
         return found;
     }
+    
+    public Customer findByCpf(String cpf){
+        return this.customersList.stream()
+                .filter(customer -> customer.getCpf().equals(cpf))
+                .findFirst().orElse(null);
+    }
 
     public void update(Customer customer) {
         for (int i = 0; i < customersList.size(); i++) {

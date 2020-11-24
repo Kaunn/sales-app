@@ -13,9 +13,10 @@
         <title>Clientes</title>
     </head>
     <body>
+        <c:set var="path" value="${pageContext.request.contextPath}"/>
         <div>
             <h1>Clientes cadastrados</h1>
-            <a href="novo-cliente.jsp">Inserir um novo cliente</a>
+            <a href="${path}/customers/new">Inserir um novo cliente</a>
         </div>
 
         <div>
@@ -33,8 +34,8 @@
                             <td>${customer.name}</td>
                             <td>${customer.cpf}</td>
                             <td>
-                                <a href="customers/id/${customer.id}">Editar</a>
-                                <form action="customers/delete" method="post">
+                                <a href="${path}/customers/id/${customer.id}">Editar</a>
+                                <form action="${path}/customers/delete" method="post">
                                     <input type="hidden" name="customer.id" value="${customer.id}"/>
                                     <button>Excluir</button>
                                 </form>

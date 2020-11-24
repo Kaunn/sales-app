@@ -10,8 +10,10 @@ import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.interceptor.IncludeParameters;
+import br.edu.unijuazeiro.progiii.sales.application.CustomersApplication;
 import br.edu.unijuazeiro.progiii.sales.domain.customer.Customer;
-import br.edu.unijuazeiro.progiii.sales.infrastructure.CustomersDB;
+import br.edu.unijuazeiro.progiii.sales.exceptions.BusinessException;
 import br.edu.unijuazeiro.progiii.sales.web.annotations.Auth;
 import javax.inject.Inject;
 
@@ -25,7 +27,7 @@ import javax.inject.Inject;
 public class CustomersController {
 
     @Inject
-    private CustomersDB customerDB;
+    private CustomersApplication customerApplication;
 
     @Inject
     private Result result;
@@ -37,29 +39,36 @@ public class CustomersController {
 
     @Get("")
     public void getCustomers() {
-        result.include("customersList", this.customerDB.listAll());
+        result.include("customersList", this.customerApplication.listAll());
     }
 
     @Get("id/{id}")
     public void getCustomer(String id) {
-        result.include("customer", this.customerDB.findById(id));
+        result.include("customer", this.customerApplication.findById(id));
     }
 
     @Post("save")
+//    @IncludeParameters
     public void save(Customer customer) {
-        this.customerDB.save(customer);
-        result.redirectTo(this).getCustomers();
+        try{
+           this.customerApplication.save(customer);
+           result.redirectTo(this).getCustomers();
+        }catch(BusinessException ex){
+           result.include("error", ex.getMessage());
+           result.include("customer", customer);
+           result.redirectTo(this).newCustomer();
+        }
     }
 
     @Post("update")
     public void update(Customer customer) {
-        this.customerDB.update(customer);
+        this.customerApplication.update(customer);
         result.redirectTo(this).getCustomers();
     }
 
     @Post("delete")
     public void delete(Customer customer) {
-        this.customerDB.delete(customer.getId());
+        this.customerApplication.delete(customer.getId());
         result.redirectTo(this).getCustomers();
     }
 
