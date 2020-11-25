@@ -10,7 +10,7 @@ import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
-import br.com.caelum.vraptor.interceptor.IncludeParameters;
+import br.com.caelum.vraptor.view.Results;
 import br.edu.unijuazeiro.progiii.sales.application.CustomersApplication;
 import br.edu.unijuazeiro.progiii.sales.domain.customer.Customer;
 import br.edu.unijuazeiro.progiii.sales.exceptions.BusinessException;
@@ -70,6 +70,11 @@ public class CustomersController {
     public void delete(Customer customer) {
         this.customerApplication.delete(customer.getId());
         result.redirectTo(this).getCustomers();
+    }
+    
+    @Get("json")
+    public void listAsJson(){
+        result.use(Results.json()).from(this.customerApplication.listAll()).serialize();
     }
 
 }

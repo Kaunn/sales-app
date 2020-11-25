@@ -13,6 +13,7 @@
         <title>Edição do cliente</title>
     </head>
     <body>
+        <%@include file="../templates/nav.jsp" %>  
         <c:set var="path" value="${pageContext.request.contextPath}"/>
         <h1>Você está editando o cliente: ${customer.name}</h1>
         <div>
@@ -23,5 +24,6 @@
                 <button type="submit">Atualizar</button>
             </form>
         </div>
+        <%@include file="../templates/footer.jsp" %>  
     </body>
 </html>

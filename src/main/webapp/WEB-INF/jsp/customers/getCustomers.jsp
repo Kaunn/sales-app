@@ -8,12 +8,15 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+
+    <c:set var="path" value="${pageContext.request.contextPath}"/>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Clientes</title>
+        <link rel="stylesheet" href="${path}/css/style.css"/>
     </head>
     <body>
-        <c:set var="path" value="${pageContext.request.contextPath}"/>
+        <%@include file="../templates/nav.jsp" %>  
         <div>
             <h1>Clientes cadastrados</h1>
             <a href="${path}/customers/new">Inserir um novo cliente</a>
@@ -47,6 +50,6 @@
         </div>
 
 
-
+        <%@include file="../templates/footer.jsp" %>  
     </body>
 </html>
